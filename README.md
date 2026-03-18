@@ -1,2 +1,4 @@
 # pba2026-Nexus
-vita
+Vita Anggraini 122450046
+Cintya Bella
+Bastian
