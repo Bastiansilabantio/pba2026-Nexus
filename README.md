@@ -4,6 +4,7 @@
 - Vita Anggraini (122450046)
 - Cintya Bella (122450066)
 - Bastian (122450130)
+Dataset: https://www.kaggle.com/datasets/kazanova/sentiment140
 
 Benchmarking PyCaret AutoML Against LSTM for Sentiment Analysis on Twitter Data
 Abstract
