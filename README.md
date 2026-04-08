@@ -6,6 +6,7 @@
 - Bastian (122450130)
   
 -Dataset: https://www.kaggle.com/datasets/kazanova/sentiment140
+
 -Hugging face : https://tubes-nlp-bcv.streamlit.app/
 Benchmarking PyCaret AutoML Against LSTM for Sentiment Analysis on Twitter Data
 Abstract
