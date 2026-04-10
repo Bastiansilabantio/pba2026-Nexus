@@ -1,52 +1,34 @@
-# Hugging Face Deploy App
+---
+title: Nexus Sentiment Analyzer
+emoji: 🐦
+colorFrom: indigo
+colorTo: purple
+sdk: docker
+pinned: false
+---
 
-Folder ini berisi versi aplikasi yang disiapkan khusus untuk deployment (misalnya ke Hugging Face Spaces / Streamlit Cloud), terpisah dari struktur project utama.
+# Nexus Sentiment Analyzer (Hugging Face Space)
 
-## Isi Folder
+Aplikasi ini adalah demo analisis sentimen teks berbahasa Inggris menggunakan model Machine Learning berbasis **TF-IDF + Logistic Regression**.
 
-- `app.py`  
-  Aplikasi Streamlit untuk inferensi sentimen tweet.
-- `best_sentiment_model.pkl`  
-  Model klasifikasi sentimen terlatih.
-- `tfidf_vectorizer.pkl`  
-  Vectorizer TF-IDF yang digunakan saat training.
-- `requirements.txt`  
-  Daftar dependency minimal untuk menjalankan app deploy.
+## 📦 Isi Folder Space
 
-## Cara Menjalankan Secara Lokal
+- `app.py` — aplikasi Streamlit
+- `best_sentiment_model.pkl` — model klasifikasi sentimen terlatih
+- `tfidf_vectorizer.pkl` — vectorizer TF-IDF
+- `requirements.txt` — dependency Python untuk runtime
+- `README.md` — metadata Space + dokumentasi singkat
 
-1. Masuk ke folder ini:
-   ```bash
-   cd huggingface_app
-   ```
+## 🚀 Catatan Deploy (Docker SDK)
 
-2. (Opsional) Buat virtual environment:
-   ```bash
-   python -m venv .venv
-   ```
+Space ini memakai **Docker SDK**, jadi jalankan aplikasi melalui `Dockerfile` yang sesuai.
+Pastikan image/container menginstall dependency dari `requirements.txt` dan mengeksekusi aplikasi Streamlit.
 
-3. Aktifkan virtual environment:
-   - Windows:
-     ```bash
-     .venv\Scripts\activate
-     ```
-   - Linux/macOS:
-     ```bash
-     source .venv/bin/activate
-     ```
+Contoh command run di dalam container:
+`streamlit run app.py --server.port 7860 --server.address 0.0.0.0`
 
-4. Install dependency:
-   ```bash
-   pip install -r requirements.txt
-   ```
+## ✅ Catatan Penting
 
-5. Jalankan aplikasi:
-   ```bash
-   streamlit run app.py
-   ```
-
-## Catatan
-
-- `app.py` membaca file model (`.pkl`) dari folder yang sama.
-- Jika nama atau lokasi file model diubah, path di `app.py` juga perlu disesuaikan.
-- Folder ini sengaja dibuat ringkas untuk kebutuhan deployment agar tidak membawa seluruh isi repository utama.
+- `app.py` membaca file model dari direktori yang sama.
+- Jika nama file model/vectorizer diubah, sesuaikan path di `app.py`.
+- Jangan simpan token/secret di dalam kode. Gunakan pengaturan secret/environment variable di Hugging Face Space.

@@ -10,7 +10,7 @@ Repository ini berisi alur mulai dari preprocessing data, hasil EDA, model terla
 
 ## 🔗 Tautan Penting
 - Dataset: [Sentiment140 (Kaggle)](https://www.kaggle.com/datasets/kazanova/sentiment140)
-- Demo App (Hugging Face/Streamlit): [tubes-nlp-bcv.streamlit.app](https://tubes-nlp-bcv.streamlit.app/)
+- Demo App (Hugging Face - Streamlit): [tubes-nlp-bcv](https://huggingface.co/spaces/cintyabella28/pba2026-nexus-sentiment)
 
 ## 📁 Struktur Repository
 ```text
