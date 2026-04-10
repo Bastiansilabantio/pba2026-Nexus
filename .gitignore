@@ -1,0 +1,97 @@
+# =========================
+# Python bytecode & cache
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# =========================
+# Virtual environments
+# =========================
+.venv/
+venv/
+env/
+ENV/
+pythonenv/
+
+# =========================
+# Packaging / build
+# =========================
+build/
+dist/
+.eggs/
+*.egg-info/
+*.egg
+pip-wheel-metadata/
+
+# =========================
+# Testing / coverage / lint
+# =========================
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.tox/
+.nox/
+
+# =========================
+# Jupyter Notebook
+# =========================
+.ipynb_checkpoints/
+
+# =========================
+# IDE / Editor
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================
+# Logs / temporary files
+# =========================
+*.log
+*.tmp
+*.temp
+
+# =========================
+# Local env / secrets
+# =========================
+.env
+.env.*
+*.env
+*.local
+
+# =========================
+# Streamlit local config
+# =========================
+.streamlit/secrets.toml
+
+# =========================
+# Large local data/model artifacts
+# (keep placeholders with .gitkeep if needed)
+# =========================
+data/raw/
+data/interim/
+data/processed/
+models/checkpoints/
+models/artifacts/
+
+# Optional: uncomment if model binaries should stay local only
+# *.pkl
+# *.joblib
+# *.h5
+# *.onnx
+# *.pt
+# *.pth
