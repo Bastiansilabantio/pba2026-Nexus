@@ -1,7 +1,7 @@
 # pba2026-Nexus
 
-Proyek analisis sentimen tweet berbasis **Machine Learning (TF-IDF + Logistic Regression)** dengan antarmuka **Streamlit**.  
-Repository ini berisi alur mulai dari preprocessing data, hasil EDA, model terlatih, hingga aplikasi inferensi.
+Proyek analisis sentimen tweet berbasis **Machine Learning** dan **Deep Learning** dengan antarmuka **Streamlit**.  
+Repository ini mencakup alur lengkap dari preprocessing data, training model, evaluasi, hingga deployment demo ke Hugging Face Spaces.
 
 ## 👥 Anggota Kelompok
 - Vita Anggraini (122450046)
@@ -10,34 +10,64 @@ Repository ini berisi alur mulai dari preprocessing data, hasil EDA, model terla
 
 ## 🔗 Tautan Penting
 - Dataset: [Sentiment140 (Kaggle)](https://www.kaggle.com/datasets/kazanova/sentiment140)
-- Demo App (Hugging Face - Streamlit): [tubes-nlp-bcv](https://huggingface.co/spaces/cintyabella28/pba2026-nexus-sentiment)
+- Demo App (ML - Logistic Regression): [HF Space ML](https://huggingface.co/spaces/cintyabella28/pba2026-nexus-sentiment)
+- Demo App (DL - BiLSTM): [HF Space DL](https://huggingface.co/spaces/cintyabella28/pba2026-nexus-sentiment-dl)
+
+---
 
 ## 📁 Struktur Repository
+
 ```text
 pba2026-Nexus/
 ├── app/
-│   └── app.py
+│   ├── app.py                 # Demo lokal model ML (TF-IDF + Logistic Regression)
+│   └── app_dl.py              # Demo lokal model DL (BiLSTM PyTorch)
 ├── assets/
 │   ├── sentiment_distribution.png
-│   └── text_length_distribution.png
+│   ├── text_length_distribution.png
+│   └── dl/
+│       ├── bilstm_sentiment_v1_history.csv
+│       └── bilstm_sentiment_v1_loss_curve.png
 ├── data/
 │   ├── cleaned_sample.csv
 │   └── hasil_scrapping_komentar_youtube.xlsx
-├── huggingface_app/
+├── huggingface_app/           # Paket deploy ML ke Hugging Face
 │   ├── app.py
 │   ├── best_sentiment_model.pkl
 │   ├── tfidf_vectorizer.pkl
+│   ├── Dockerfile
+│   └── requirements.txt
+├── huggingface_app_dl/        # Paket deploy DL ke Hugging Face
+│   ├── app.py
+│   ├── bilstm_state_dict.pt
+│   ├── vocab.json
+│   ├── config.json
+│   ├── Dockerfile
 │   └── requirements.txt
 ├── models/
 │   ├── best_sentiment_model.pkl
-│   └── tfidf_vectorizer.pkl
+│   ├── tfidf_vectorizer.pkl
+│   └── dl/
+│       ├── bilstm_state_dict.pt
+│       ├── bilstm_sentiment.pt
+│       ├── vocab.json
+│       ├── config.json
+│       ├── train_config.json
+│       ├── train_metrics.json
+│       └── eval_metrics.json
 ├── notebooks/
 │   └── EDA_dan_Preprocessing.ipynb
 ├── scripts/
-│   └── eda_preprocessing.py
+│   ├── eda_preprocessing.py
+│   ├── dl_bilstm_model.py
+│   ├── check_bilstm_params.py
+│   ├── train_bilstm.py
+│   └── eval_bilstm.py
 ├── requirements.txt
 └── README.md
 ```
+
+---
 
 ## 🚀 Menjalankan Aplikasi Secara Lokal
 
@@ -47,7 +77,7 @@ git clone <url-repository-anda>
 cd pba2026-Nexus
 ```
 
-### 2) Buat dan aktifkan virtual environment (opsional tapi direkomendasikan)
+### 2) Buat dan aktifkan virtual environment (opsional, direkomendasikan)
 ```bash
 python -m venv .venv
 ```
@@ -67,31 +97,116 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 4) Jalankan Streamlit app
+### 4) Jalankan demo ML
 ```bash
 streamlit run app/app.py
 ```
 
-## 🧠 Model
+### 5) Jalankan demo DL
+```bash
+streamlit run app/app_dl.py
+```
+
+---
+
+## 🤖 Model Machine Learning (Baseline)
+
 - **Algoritma**: Logistic Regression  
 - **Fitur teks**: TF-IDF  
 - **Kelas sentimen**:
   - `0` = Negatif
   - `1` = Positif
 
-## 🔄 Ringkasan Pipeline
-1. Ambil dataset Sentiment140.
-2. Lakukan cleaning teks (lowercase, hapus URL/mention/karakter non-huruf).
-3. Transformasi teks menggunakan TF-IDF.
-4. Latih model klasifikasi sentimen.
-5. Simpan model dan vectorizer (`.pkl`).
-6. Sajikan inferensi melalui aplikasi Streamlit.
+---
+
+## 🧠 Model Deep Learning (BiLSTM - PyTorch)
+
+Arsitektur DL yang digunakan:
+- **Embedding Layer**
+- **BiLSTM (bidirectional=True)**
+- **Dropout**
+- **Linear Classifier**
+
+Konfigurasi utama:
+- `embedding_dim`: 128
+- `hidden_dim`: 128
+- `num_layers`: 2
+- `dropout`: 0.3
+- `max_len`: 50
+- `vocab_size`: 4425
+
+### ✅ Verifikasi Batas Parameter
+- **Trainable parameters**: `1,226,370`
+- **Batas maksimal tugas**: `10,000,000`
+- **Status**: **PASS**
+
+---
+
+## 📊 Hasil Evaluasi Model DL (Test Set)
+
+Berdasarkan `models/dl/eval_metrics.json`:
+
+- **Accuracy**: `0.6917`
+- **Precision**: `0.6890`
+- **Recall**: `0.7000`
+- **F1-score**: `0.6944`
+- **Confusion Matrix**:
+  - TN = 341
+  - FP = 158
+  - FN = 150
+  - TP = 350
+
+---
+
+## 📉 Kurva Training & Validation Metrics
+
+Grafik metrik training tersedia di:
+- `assets/dl/bilstm_sentiment_v1_loss_curve.png` (kurva train/validation loss)
+- `assets/dl/bilstm_sentiment_v1_accuracy_curve.png` (kurva train/validation accuracy)
+- `assets/dl/bilstm_sentiment_v1_metrics_combined.png` (grafik gabungan loss + accuracy)
+
+History per-epoch tersedia di:
+- `assets/dl/bilstm_sentiment_v1_history.csv`
+
+---
+
+## 🏋️ Cara Training & Evaluasi Model DL
+
+### Training BiLSTM
+```bash
+python scripts/train_bilstm.py --epochs 6 --batch-size 64 --run-name bilstm_sentiment_v1
+```
+
+### Evaluasi BiLSTM
+```bash
+python scripts/eval_bilstm.py --output-json models/dl/eval_metrics.json
+```
+
+---
+
+## 🚀 Deploy Hugging Face Spaces
+
+### ML Demo Space
+- Folder deploy: `huggingface_app/`
+- Link: [HF Space ML](https://huggingface.co/spaces/cintyabella28/pba2026-nexus-sentiment)
+
+### DL Demo Space
+- Folder deploy: `huggingface_app_dl/`
+- Link: [HF Space DL](https://huggingface.co/spaces/cintyabella28/pba2026-nexus-sentiment-dl)
+
+---
 
 ## 📝 Catatan
-- File model di folder `models/` diperlukan saat menjalankan aplikasi lokal.
-- Folder `huggingface_app/` disiapkan untuk deployment terpisah.
-- Jika ada perbedaan path model, sesuaikan path di `app/app.py`.
+
+- Artifact model DL standar untuk demo:
+  - `models/dl/bilstm_state_dict.pt`
+  - `models/dl/vocab.json`
+  - `models/dl/config.json`
+- Pastikan file artifact tersedia sebelum menjalankan `app/app_dl.py`.
+- Untuk deployment, gunakan folder deploy terpisah (`huggingface_app/` dan `huggingface_app_dl/`) agar struktur rapi.
+
+---
 
 ## 📜 Lisensi
 Belum ditentukan.  
-Disarankan menambahkan file `LICENSE` (mis. MIT) jika repository akan dipublikasikan secara terbuka.
+Disarankan menambahkan file `LICENSE` (misalnya MIT) jika repository dipublikasikan secara terbuka.

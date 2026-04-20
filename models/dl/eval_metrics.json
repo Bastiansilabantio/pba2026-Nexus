@@ -1,0 +1,68 @@
+{
+  "num_test_samples": 999,
+  "accuracy": 0.6916916916916916,
+  "precision": 0.6889763779527559,
+  "recall": 0.7,
+  "f1_score": 0.6944444444444444,
+  "confusion_matrix": [
+    [
+      341,
+      158
+    ],
+    [
+      150,
+      350
+    ]
+  ],
+  "classification_report": {
+    "negative": {
+      "precision": 0.6945010183299389,
+      "recall": 0.6833667334669339,
+      "f1-score": 0.6888888888888889,
+      "support": 499.0
+    },
+    "positive": {
+      "precision": 0.6889763779527559,
+      "recall": 0.7,
+      "f1-score": 0.6944444444444444,
+      "support": 500.0
+    },
+    "accuracy": 0.6916916916916916,
+    "macro avg": {
+      "precision": 0.6917386981413474,
+      "recall": 0.691683366733467,
+      "f1-score": 0.6916666666666667,
+      "support": 999.0
+    },
+    "weighted avg": {
+      "precision": 0.6917359330560736,
+      "recall": 0.6916916916916916,
+      "f1-score": 0.6916694472250028,
+      "support": 999.0
+    }
+  },
+  "artifacts_used": {
+    "model_file": "models\\dl\\bilstm_sentiment.pt",
+    "vocab_file": "models\\dl\\vocab.json",
+    "config_file": "models\\dl\\config.json",
+    "mode": "checkpoint"
+  },
+  "config_used": {
+    "data_path": "data\\cleaned_sample.csv",
+    "model_dir": "models\\dl",
+    "text_col": "clean_text",
+    "label_col": "sentiment",
+    "test_size": 0.1,
+    "random_state": 42,
+    "batch_size": 256,
+    "val_size": 0.1,
+    "val_rel_size": 0.11111111111111112,
+    "max_len": 50,
+    "vocab_size": 4425,
+    "embedding_dim": 128,
+    "hidden_dim": 128,
+    "num_layers": 2,
+    "dropout": 0.3,
+    "bidirectional": true
+  }
+}

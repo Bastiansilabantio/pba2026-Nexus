@@ -1,0 +1,9 @@
+{
+  "run_name": "bilstm_sentiment_v1",
+  "best_val_loss": 0.5476622356547488,
+  "test_loss": 0.5819665530661086,
+  "test_acc": 0.6916916916916916,
+  "trainable_params": 1226370,
+  "max_allowed_params": 10000000,
+  "parameter_limit_ok": true
+}

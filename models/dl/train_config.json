@@ -1,0 +1,20 @@
+{
+  "vocab_size": 4425,
+  "embedding_dim": 128,
+  "hidden_dim": 128,
+  "num_layers": 2,
+  "dropout": 0.3,
+  "num_classes": 2,
+  "pad_idx": 0,
+  "bidirectional": true,
+  "max_parameters": 10000000,
+  "max_len": 50,
+  "pad_token": "<PAD>",
+  "unk_token": "<UNK>",
+  "unk_idx": 1,
+  "label_map": {
+    "0": "negative",
+    "1": "positive"
+  },
+  "run_name": "bilstm_sentiment_v1"
+}
