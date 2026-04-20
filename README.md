@@ -119,6 +119,21 @@ streamlit run app/app_dl.py
 
 ---
 
+## 📈 Hasil Evaluasi Model ML (Baseline)
+
+Hasil baseline model **Logistic Regression + TF-IDF** (sesuai informasi demo ML):
+
+- **Akurasi**: `73.5%`
+- **Model**: Logistic Regression
+- **Fitur**: TF-IDF
+- **Dataset eksperimen**: Sentiment140 (sampling 10.000 data)
+
+Catatan:
+- Ringkasan performa baseline ini digunakan sebagai pembanding awal sebelum eksperimen Deep Learning (BiLSTM).
+- Jika tersedia file evaluasi terstruktur untuk ML, metrik tambahan (precision/recall/F1/confusion matrix) bisa ditambahkan pada bagian ini.
+
+---
+
 ## 🧠 Model Deep Learning (BiLSTM - PyTorch)
 
 Arsitektur DL yang digunakan:
